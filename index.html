@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英文單字測驗</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .quiz-container, .upload-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .upload-container {
+            text-align: center;
+        }
+        .upload-container p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .file-input {
+            display: none;
+        }
+        .file-input-label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .file-input-label:hover {
+            background-color: #45a049;
+        }
+        .word-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .word {
+            font-size: 2em;
+            margin: 0;
+        }
+        .sound-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #4CAF50;
+        }
+        .timer {
+            font-size: 1.2em;
+            text-align: center;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .option-btn {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+        .option-btn:hover {
+            background-color: #e9ecef;
+        }
+        .result {
+            text-align: center;
+            margin: 15px 0;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .score {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .next-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+        .next-btn:hover {
+            background-color: #45a049;
+        }
+        .correct {
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
+        }
+        .incorrect {
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+        }
+        #quiz-section {
+            display: none;
+        }
+        .template-download {
+            margin-top: 10px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .template-download:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <h2>英文單字測驗</h2>
+        <p>請上傳 CSV 格式的單字表，格式為：英文單字,中文翻譯1,中文翻譯2,中文翻譯3,中文翻譯4（正確答案請放在第一個）</p>
+        <div class="file-input-wrapper">
+            <input type="file" id="file-input" class="file-input" accept=".csv">
+            <label for="file-input" class="file-input-label">
+                <i class="fas fa-upload"></i> 上傳單字表
+            </label>
+        </div>
+        <a href="#" id="download-template" class="template-download">
+            <i class="fas fa-download"></i> 下載範例單字表
+        </a>
+    </div>
+    
+    <div id="quiz-section" class="quiz-container">
+        <div class="score">分數: <span id="score">0</span></div>
+        <div class="timer">剩餘時間: <span id="time">15</span> 秒</div>
+        <div class="word-section">
+            <h2 id="word" class="word"></h2>
+            <button id="sound" class="sound-btn">
+                <i class="fas fa-volume-up"></i>
+            </button>
+        </div>
+        <div id="options" class="options"></div>
+        <div id="result" class="result"></div>
+        <button id="next" class="next-btn" style="display: none;">下一題</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
